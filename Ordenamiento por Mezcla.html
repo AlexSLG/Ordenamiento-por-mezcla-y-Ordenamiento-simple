@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenamiento por Mezcla</title>
+    <title>Ordenamiento Rapido</title>
+    <style type="text/css" media="screen">
+      A:link {color: black;  font-family: arial; text-decoration: none }
+      A:hover {color: rgb(22, 170, 196);  font-family: arial; text-decoration: none }
+      A:visited { font-family: arial; text-decoration: none }
+    h1
+    {
+      color: black;
+    }
+    p
+    {
+      color: black;
+    }
+</style>
+    <script text="text/javascript">
+        function mezclaSort(Arreglo)
+        {
+            var cont = 0
+            function merge(Arreglo, start, middle, end) 
+            {
+            let i = start, j = middle, newArreglo = [];
+                while (middle > i || end > j) 
+                {
+                    if (i < middle && j < end) 
+                    {
+                        Arreglo[i] < Arreglo[j] ? newArreglo.push(Arreglo[i++]) : newArreglo.push(Arreglo[j++]); 
+                    } 
+                    else 
+                    {
+                        i < middle ? newArreglo.push(Arreglo[i++]) : newArreglo.push(Arreglo[j++]);
+                    }
+                }
+                newArreglo.forEach((v,k) => Arreglo[start + k] = v);
+            }
+
+            function mergeSort(Arreglo, start, end) 
+            {
+                start = start === undefined ? 0 : start;
+                cont = cont + 1;
+                end = end === undefined ? Arreglo.length : end;
+                cont = cont + 1;
+                if (end - start > 2) 
+                {
+                    mergeSort(Arreglo, start, Math.floor((end + start) / 2));
+                    cont = cont + 1;
+                    mergeSort(Arreglo, Math.floor((end + start) / 2), end);
+                    cont = cont + 1;
+                    merge(Arreglo, start, Math.floor((end + start) / 2), end)
+                    cont = cont + 1;
+                } 
+                
+                else if (end - start === 2 && Arreglo[start] > Arreglo[end - 1]) 
+                {
+                    const tmp = Arreglo[start];
+                    cont = cont + 1;
+                    Arreglo[start] = Arreglo[end - 1];
+                    cont = cont + 1;
+                    Arreglo[end - 1] = tmp;
+                    cont = cont + 1;
+                }
+                return Arreglo
+            }
+            document.getElementById("lblResultado").innerHTML="Ordenamiento por Mezcla" + "<br>" + mergeSort(Arreglo);
+        }
+        let Vector = [8, 7, 9, 15, 10, 1, 2, 3, 5, 6, 11] ;
+        document.write("El arreglo es: " + "[" + Vector + "]" + "<br>");
+    </script>
+</head>
+<body>
+    <body bgcolor="#FFFFFF "></body>
+    <h1>Ordenamiento Mezcla</h1>
+    <p>
+        <button type="button" onclick="mezclaSort(Vector)">Ordenar</button>
+    </p>
+    <p id="lblResultado"></p>
+    <center>
+        <img src="https://img.freepik.com/foto-gratis/imagen-primer-plano-programador-trabajando-su-escritorio-oficina_1098-18707.jpg";
+        alt="programador" width="1000" height="500"> <sbr>
+        <h1> ALGORITMICA Y LENGUAJE DE PROGRAMACIÓN</h1>
+      </center>
+</body>
+</html>
